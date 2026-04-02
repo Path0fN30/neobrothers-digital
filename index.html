@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neo Brothers Digital | Bring Your Business to the Modern Era</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #080808;
+    --dark: #0f0f0f;
+    --card: #141414;
+    --border: #222222;
+    --accent: #00ff87;
+    --accent2: #00c8ff;
+    --white: #f0f0f0;
+    --gray: #888888;
+    --heading: 'Bebas Neue', sans-serif;
+    --body: 'DM Sans', sans-serif;
+    --mono: 'Space Mono', monospace;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--body);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* CUSTOM CURSOR */
+  .cursor {
+    width: 12px; height: 12px;
+    background: var(--accent);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s ease;
+    mix-blend-mode: difference;
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    transition: all 0.15s ease;
+    opacity: 0.5;
+  }
+
+  /* NOISE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9990;
+    opacity: 0.4;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 24px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid transparent;
+    transition: all 0.3s ease;
+  }
+  nav.scrolled {
+    background: rgba(8,8,8,0.95);
+    border-bottom-color: var(--border);
+    backdrop-filter: blur(20px);
+    padding: 16px 60px;
+  }
+  .logo {
+    font-family: var(--heading);
+    font-size: 28px;
+    letter-spacing: 2px;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .logo span { color: var(--accent); }
+  .nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gray);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-cta {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--black);
+    background: var(--accent);
+    padding: 10px 22px;
+    text-decoration: none;
+    transition: all 0.2s;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  }
+  .nav-cta:hover { background: var(--accent2); transform: translateY(-1px); }
+
+  /* HERO */
+  #home {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 120px 60px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,255,135,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,255,135,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse at center, black 20%, transparent 80%);
+  }
+  .hero-glow {
+    position: absolute;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(0,255,135,0.08) 0%, transparent 70%);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 900px; }
+  .hero-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-tag::before {
+    content: '';
+    width: 40px; height: 1px;
+    background: var(--accent);
+  }
+  h1 {
+    font-family: var(--heading);
+    font-size: clamp(72px, 10vw, 140px);
+    line-height: 0.92;
+    letter-spacing: 2px;
+    margin-bottom: 32px;
+  }
+  h1 .line2 { color: var(--accent); }
+  .hero-sub {
+    font-size: 18px;
+    color: var(--gray);
+    max-width: 520px;
+    line-height: 1.7;
+    margin-bottom: 48px;
+    font-weight: 300;
+  }
+  .hero-actions { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+  .btn-primary {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--black);
+    background: var(--accent);
+    padding: 16px 36px;
+    text-decoration: none;
+    transition: all 0.25s;
+    clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+    font-weight: 700;
+  }
+  .btn-primary:hover { background: var(--accent2); transform: translateY(-2px); box-shadow: 0 20px 40px rgba(0,255,135,0.2); }
+  .btn-ghost {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--white);
+    border: 1px solid var(--border);
+    padding: 16px 36px;
+    text-decoration: none;
+    transition: all 0.25s;
+  }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+  .hero-stats {
+    position: absolute;
+    right: 60px; bottom: 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    text-align: right;
+  }
+  .stat-num {
+    font-family: var(--heading);
+    font-size: 48px;
+    line-height: 1;
+    color: var(--white);
+  }
+  .stat-num span { color: var(--accent); }
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-top: 4px;
+  }
+
+  /* TICKER */
+  .ticker {
+    background: var(--accent);
+    padding: 14px 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .ticker-inner {
+    display: inline-flex;
+    animation: ticker 20s linear infinite;
+  }
+  .ticker-item {
+    font-family: var(--heading);
+    font-size: 16px;
+    letter-spacing: 3px;
+    color: var(--black);
+    padding: 0 40px;
+  }
+  .ticker-dot {
+    color: var(--black);
+    opacity: 0.4;
+  }
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* SECTIONS */
+  section { padding: 100px 60px; }
+  .section-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::before {
+    content: '';
+    width: 30px; height: 1px;
+    background: var(--accent);
+  }
+  h2 {
+    font-family: var(--heading);
+    font-size: clamp(48px, 6vw, 80px);
+    line-height: 0.95;
+    letter-spacing: 1px;
+    margin-bottom: 24px;
+  }
+  .section-sub {
+    font-size: 16px;
+    color: var(--gray);
+    max-width: 480px;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* SERVICES */
+  #services { background: var(--dark); }
+  .services-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 64px;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+  .service-card {
+    background: var(--card);
+    padding: 48px 40px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid var(--border);
+  }
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-card:hover { transform: translateY(-4px); border-color: rgba(0,255,135,0.2); }
+  .service-num {
+    font-family: var(--heading);
+    font-size: 64px;
+    color: var(--border);
+    line-height: 1;
+    margin-bottom: 24px;
+    transition: color 0.3s;
+  }
+  .service-card:hover .service-num { color: rgba(0,255,135,0.15); }
+  .service-icon {
+    font-size: 32px;
+    margin-bottom: 20px;
+  }
+  .service-title {
+    font-family: var(--heading);
+    font-size: 32px;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+    color: var(--white);
+  }
+  .service-desc {
+    font-size: 14px;
+    color: var(--gray);
+    line-height: 1.8;
+    font-weight: 300;
+  }
+  .service-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 24px;
+  }
+  .tag {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid rgba(0,255,135,0.3);
+    padding: 4px 10px;
+  }
+
+  /* WORK / PORTFOLIO */
+  #work { background: var(--black); }
+  .work-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 64px;
+    flex-wrap: wrap;
+    gap: 40px;
+  }
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  .portfolio-card {
+    position: relative;
+    overflow: hidden;
+    background: var(--card);
+    border: 1px solid var(--border);
+    group: true;
+    cursor: none;
+  }
+  .portfolio-card:first-child {
+    grid-row: span 2;
+  }
+  .portfolio-img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+  .portfolio-card:first-child .portfolio-img {
+    aspect-ratio: 3/4;
+    height: 100%;
+  }
+  .portfolio-card:hover .portfolio-img { transform: scale(1.05); }
+  .portfolio-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, transparent 60%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 32px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .portfolio-card:hover .portfolio-overlay { opacity: 1; }
+  .portfolio-cat {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .portfolio-name {
+    font-family: var(--heading);
+    font-size: 28px;
+    letter-spacing: 1px;
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+  .portfolio-desc {
+    font-size: 13px;
+    color: rgba(240,240,240,0.7);
+    line-height: 1.6;
+  }
+  /* Placeholder portfolio images using CSS */
+  .portfolio-placeholder {
+    width: 100%;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+  .portfolio-card:first-child .portfolio-placeholder {
+    height: 100%;
+    min-height: 500px;
+  }
+  .portfolio-placeholder { min-height: 200px; }
+  .p1 { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); }
+  .p2 { background: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #1f2937 100%); }
+  .p3 { background: linear-gradient(135deg, #111827 0%, #1e3a5f 100%); }
+  .p4 { background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2e 100%); }
+  .portfolio-mock {
+    padding: 20px;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: rgba(0,255,135,0.3);
+    position: absolute;
+    top: 20px; left: 20px;
+    line-height: 1.8;
+  }
+
+  /* ABOUT */
+  #about { background: var(--dark); }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .about-visual {
+    position: relative;
+  }
+  .about-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 60px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .about-box::after {
+    content: 'NBD';
+    font-family: var(--heading);
+    font-size: 180px;
+    color: rgba(0,255,135,0.03);
+    position: absolute;
+    bottom: -20px; right: -10px;
+    line-height: 1;
+    pointer-events: none;
+  }
+  .about-accent-line {
+    width: 60px; height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    margin-bottom: 32px;
+  }
+  .about-text {
+    font-size: 16px;
+    color: var(--gray);
+    line-height: 1.9;
+    font-weight: 300;
+    margin-bottom: 24px;
+  }
+  .about-text strong { color: var(--white); font-weight: 500; }
+  .about-values {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 40px;
+  }
+  .value-item {
+    padding: 20px;
+    border: 1px solid var(--border);
+    transition: border-color 0.3s;
+  }
+  .value-item:hover { border-color: rgba(0,255,135,0.3); }
+  .value-icon { font-size: 24px; margin-bottom: 12px; }
+  .value-title {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+  .value-desc { font-size: 13px; color: var(--gray); line-height: 1.6; }
+
+  /* CONTACT */
+  #contact { background: var(--black); position: relative; overflow: hidden; }
+  #contact::before {
+    content: '';
+    position: absolute;
+    width: 800px; height: 800px;
+    background: radial-gradient(circle, rgba(0,200,255,0.05) 0%, transparent 70%);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+  .contact-inner { position: relative; z-index: 2; }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+    margin-top: 64px;
+  }
+  .contact-info h3 {
+    font-family: var(--heading);
+    font-size: 48px;
+    letter-spacing: 1px;
+    margin-bottom: 24px;
+    color: var(--white);
+  }
+  .contact-info p {
+    font-size: 16px;
+    color: var(--gray);
+    line-height: 1.8;
+    margin-bottom: 40px;
+    font-weight: 300;
+  }
+  .contact-details { display: flex; flex-direction: column; gap: 20px; }
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px;
+    border: 1px solid var(--border);
+    transition: all 0.3s;
+  }
+  .contact-item:hover { border-color: rgba(0,255,135,0.3); transform: translateX(4px); }
+  .contact-item-icon {
+    width: 40px; height: 40px;
+    background: rgba(0,255,135,0.1);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .contact-item-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 4px;
+  }
+  .contact-item-value { font-size: 15px; color: var(--white); }
+
+  /* FORM */
+  .contact-form { display: flex; flex-direction: column; gap: 20px; }
+  .form-group { display: flex; flex-direction: column; gap: 8px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gray);
+  }
+  input, textarea, select {
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--white);
+    padding: 16px 20px;
+    font-family: var(--body);
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+    -webkit-appearance: none;
+  }
+  input:focus, textarea:focus, select:focus { border-color: var(--accent); }
+  textarea { resize: vertical; min-height: 120px; }
+  select { cursor: none; }
+  select option { background: var(--card); }
+  .form-submit {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--black);
+    background: var(--accent);
+    border: none;
+    padding: 18px 40px;
+    cursor: none;
+    transition: all 0.25s;
+    clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+    font-weight: 700;
+    align-self: flex-start;
+  }
+  .form-submit:hover { background: var(--accent2); transform: translateY(-2px); }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark);
+    border-top: 1px solid var(--border);
+    padding: 48px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+  .footer-logo {
+    font-family: var(--heading);
+    font-size: 24px;
+    letter-spacing: 2px;
+    color: var(--white);
+  }
+  .footer-logo span { color: var(--accent); }
+  .footer-tagline {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-top: 6px;
+  }
+  .footer-copy {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--gray);
+    text-align: right;
+  }
+  .footer-copy span { color: var(--accent); }
+
+  /* SCROLL ANIMATIONS */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+  .reveal-delay-5 { transition-delay: 0.5s; }
+
+  /* MOBILE */
+  @media (max-width: 900px) {
+    nav { padding: 20px 24px; }
+    nav.scrolled { padding: 14px 24px; }
+    .nav-links { display: none; }
+    #home { padding: 120px 24px 80px; }
+    .hero-stats { display: none; }
+    section { padding: 72px 24px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .portfolio-grid { grid-template-columns: 1fr; }
+    .portfolio-card:first-child { grid-row: span 1; }
+    .portfolio-card:first-child .portfolio-placeholder { min-height: 200px; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+    .form-row { grid-template-columns: 1fr; }
+    footer { flex-direction: column; text-align: center; }
+    .footer-copy { text-align: center; }
+    .services-header { flex-direction: column; }
+    .work-header { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#home" class="logo">NEO<span>.</span>BROTHERS</a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#work">Our Work</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Get Started</a>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Digital Agency · Est. 2024</div>
+    <h1>
+      BRING YOUR<br>
+      <span class="line2">BUSINESS</span><br>
+      TO THE<br>
+      MODERN ERA
+    </h1>
+    <p class="hero-sub">We build websites and digital experiences that turn local businesses into online powerhouses. Professional. Fast. Results-driven.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Start Your Project</a>
+      <a href="#work" class="btn-ghost">See Our Work</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div>
+      <div class="stat-num">100<span>%</span></div>
+      <div class="stat-label">Client Satisfaction</div>
+    </div>
+    <div>
+      <div class="stat-num">48<span>h</span></div>
+      <div class="stat-label">Avg. Turnaround</div>
+    </div>
+    <div>
+      <div class="stat-num">5<span>★</span></div>
+      <div class="stat-label">Rated Agency</div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-item">WEB DESIGN</span><span class="ticker-dot">✦</span>
+    <span class="ticker-item">APP DEVELOPMENT</span><span class="ticker-dot">✦</span>
+    <span class="ticker-item">SEO OPTIMIZATION</span><span class="ticker-dot">✦</span>
+    <span class="ticker-item">MODERN ERA</span><span class="ticker-dot">✦</span>
+    <span class="ticker-item">DIGITAL SOLUTIONS</span><span class="ticker-dot">✦</span>
+    <span class="ticker-item">LOCAL BUSINESS</span><span class="ticker-dot">✦</span>
+    <span class="ticker-item">WEB DESIGN</span><span class="ticker-dot">✦</span>
+    <span class="ticker-item">APP DEVELOPMENT</span><span class="ticker-dot">✦</span>
+    <span class="ticker-item">SEO OPTIMIZATION</span><span class="ticker-dot">✦</span>
+    <span class="ticker-item">MODERN ERA</span><span class="ticker-dot">✦</span>
+    <span class="ticker-item">DIGITAL SOLUTIONS</span><span class="ticker-dot">✦</span>
+    <span class="ticker-item">LOCAL BUSINESS</span><span class="ticker-dot">✦</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-header">
+    <div>
+      <div class="section-label reveal">What We Do</div>
+      <h2 class="reveal">OUR<br>SERVICES</h2>
+    </div>
+    <p class="section-sub reveal">Everything your business needs to dominate online — from first impression to full digital presence.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-num">01</div>
+      <div class="service-icon">🌐</div>
+      <div class="service-title">Web Design & Development</div>
+      <p class="service-desc">Custom websites built from scratch that look stunning on every device. Fast, modern, and designed to convert visitors into customers.</p>
+      <div class="service-tags">
+        <span class="tag">HTML/CSS</span>
+        <span class="tag">React</span>
+        <span class="tag">WordPress</span>
+        <span class="tag">Responsive</span>
+      </div>
+    </div>
+    <div class="service-card reveal reveal-delay-1">
+      <div class="service-num">02</div>
+      <div class="service-icon">📱</div>
+      <div class="service-title">App Development</div>
+      <p class="service-desc">Mobile and web applications that solve real business problems. Booking systems, customer portals, e-commerce — we build it all.</p>
+      <div class="service-tags">
+        <span class="tag">iOS</span>
+        <span class="tag">Android</span>
+        <span class="tag">Web App</span>
+        <span class="tag">E-Commerce</span>
+      </div>
+    </div>
+    <div class="service-card reveal reveal-delay-2">
+      <div class="service-num">03</div>
+      <div class="service-icon">📈</div>
+      <div class="service-title">SEO & Google Ranking</div>
+      <p class="service-desc">Get found when customers search for your business. We optimize your site to rank on Google and drive organic traffic that converts.</p>
+      <div class="service-tags">
+        <span class="tag">Local SEO</span>
+        <span class="tag">Google Maps</span>
+        <span class="tag">Analytics</span>
+        <span class="tag">Content</span>
+      </div>
+    </div>
+    <div class="service-card reveal reveal-delay-1">
+      <div class="service-num">04</div>
+      <div class="service-icon">🔧</div>
+      <div class="service-title">Maintenance & Support</div>
+      <p class="service-desc">Monthly maintenance plans that keep your site secure, fast, and up to date — so you can focus on running your business.</p>
+      <div class="service-tags">
+        <span class="tag">Updates</span>
+        <span class="tag">Security</span>
+        <span class="tag">Backups</span>
+        <span class="tag">Support</span>
+      </div>
+    </div>
+    <div class="service-card reveal reveal-delay-2">
+      <div class="service-num">05</div>
+      <div class="service-icon">🎨</div>
+      <div class="service-title">Branding & Identity</div>
+      <p class="service-desc">Logo design, brand colors, and complete visual identity packages that make your business look professional and memorable.</p>
+      <div class="service-tags">
+        <span class="tag">Logo Design</span>
+        <span class="tag">Brand Kit</span>
+        <span class="tag">Print</span>
+        <span class="tag">Social</span>
+      </div>
+    </div>
+    <div class="service-card reveal reveal-delay-3">
+      <div class="service-num">06</div>
+      <div class="service-icon">⚡</div>
+      <div class="service-title">Speed & Performance</div>
+      <p class="service-desc">Slow websites lose customers. We audit and optimize your existing site for lightning-fast load times and better Google rankings.</p>
+      <div class="service-tags">
+        <span class="tag">Page Speed</span>
+        <span class="tag">Core Web Vitals</span>
+        <span class="tag">CDN</span>
+        <span class="tag">Optimization</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work">
+  <div class="work-header">
+    <div>
+      <div class="section-label reveal">Portfolio</div>
+      <h2 class="reveal">OUR<br>WORK</h2>
+    </div>
+    <p class="section-sub reveal">Real projects. Real results. Every site we build is crafted to make our clients look like the professionals they are.</p>
+  </div>
+  <div class="portfolio-grid">
+    <div class="portfolio-card reveal">
+      <div class="portfolio-placeholder p1" style="min-height:520px; position:relative;">
+        <div class="portfolio-mock">
+          &lt;nav&gt; RestoPrime &lt;/nav&gt;<br>
+          &lt;hero&gt; Reserve Your Table &lt;/hero&gt;<br>
+          &lt;section&gt; Menu &lt;/section&gt;<br>
+          &lt;section&gt; Gallery &lt;/section&gt;<br>
+          &lt;footer&gt; Book Now &lt;/footer&gt;
+        </div>
+      </div>
+      <div class="portfolio-overlay">
+        <div class="portfolio-cat">Restaurant · Web Design</div>
+        <div class="portfolio-name">RestoPrime</div>
+        <div class="portfolio-desc">Full website with online reservations, menu, and gallery for a local Italian restaurant.</div>
+      </div>
+    </div>
+    <div class="portfolio-card reveal reveal-delay-1">
+      <div class="portfolio-placeholder p2" style="min-height:200px; position:relative;">
+        <div class="portfolio-mock">
+          &lt;header&gt; CleanPro Services &lt;/header&gt;<br>
+          &lt;section&gt; Book Online &lt;/section&gt;
+        </div>
+      </div>
+      <div class="portfolio-overlay">
+        <div class="portfolio-cat">Cleaning Service · Web App</div>
+        <div class="portfolio-name">CleanPro</div>
+        <div class="portfolio-desc">Booking system with service packages and instant quote calculator.</div>
+      </div>
+    </div>
+    <div class="portfolio-card reveal reveal-delay-2">
+      <div class="portfolio-placeholder p3" style="min-height:200px; position:relative;">
+        <div class="portfolio-mock">
+          &lt;header&gt; FreshCuts Barbershop &lt;/header&gt;<br>
+          &lt;section&gt; Appointments &lt;/section&gt;
+        </div>
+      </div>
+      <div class="portfolio-overlay">
+        <div class="portfolio-cat">Barbershop · Booking System</div>
+        <div class="portfolio-name">FreshCuts</div>
+        <div class="portfolio-desc">Online appointment scheduling system that fills the chair every day.</div>
+      </div>
+    </div>
+    <div class="portfolio-card reveal reveal-delay-3">
+      <div class="portfolio-placeholder p4" style="min-height:200px; position:relative;">
+        <div class="portfolio-mock">
+          &lt;header&gt; EliteSmiles Dental &lt;/header&gt;<br>
+          &lt;section&gt; New Patients &lt;/section&gt;
+        </div>
+      </div>
+      <div class="portfolio-overlay">
+        <div class="portfolio-cat">Healthcare · Web Design</div>
+        <div class="portfolio-name">EliteSmiles Dental</div>
+        <div class="portfolio-desc">Patient-focused website with appointment booking and insurance info.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-visual reveal">
+      <div class="about-box">
+        <div class="about-accent-line"></div>
+        <div class="section-label" style="margin-bottom:12px;">Our Story</div>
+        <p class="about-text">
+          <strong>Neo Brothers Digital</strong> was built on one simple belief — every local business deserves a powerful online presence, not just the ones with big budgets.
+        </p>
+        <p class="about-text">
+          We're a <strong>full-service digital agency</strong> specializing in helping local businesses in our community get found online, look professional, and win more customers through the power of the modern web.
+        </p>
+        <p class="about-text">
+          Whether you're a restaurant, barbershop, plumber, or dentist — if you don't have a website, you're invisible to the customers who need you most. <strong>We fix that.</strong>
+        </p>
+      </div>
+    </div>
+    <div class="reveal reveal-delay-2">
+      <div class="section-label">Why Choose Us</div>
+      <h2>WE BUILD<br>RESULTS</h2>
+      <p class="section-sub" style="margin-bottom:40px;">We don't just build pretty websites. We build digital tools that grow your business.</p>
+      <div class="about-values">
+        <div class="value-item">
+          <div class="value-icon">⚡</div>
+          <div class="value-title">Fast Delivery</div>
+          <div class="value-desc">Most projects delivered within 5–7 business days.</div>
+        </div>
+        <div class="value-item">
+          <div class="value-icon">💰</div>
+          <div class="value-title">Local Pricing</div>
+          <div class="value-desc">Agency quality at prices that make sense for small business.</div>
+        </div>
+        <div class="value-item">
+          <div class="value-icon">🔒</div>
+          <div class="value-title">You Own It</div>
+          <div class="value-desc">Your website, your domain, your code. Always.</div>
+        </div>
+        <div class="value-item">
+          <div class="value-icon">📞</div>
+          <div class="value-title">Real Support</div>
+          <div class="value-desc">Direct access to our team. No tickets. No runaround.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="section-label reveal">Get In Touch</div>
+    <h2 class="reveal">START YOUR<br>PROJECT</h2>
+    <div class="contact-grid">
+      <div class="reveal">
+        <h3>Let's bring your business to the modern era.</h3>
+        <p>Tell us about your business and what you need. We'll put together a free mockup and a no-pressure proposal — usually within 24 hours.</p>
+        <div class="contact-details">
+          <div class="contact-item">
+            <div class="contact-item-icon">📧</div>
+            <div>
+              <div class="contact-item-label">Email Us</div>
+              <div class="contact-item-value">hello@neobrosdigital.com</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">📞</div>
+            <div>
+              <div class="contact-item-label">Call or Text</div>
+              <div class="contact-item-value">(555) 000-0000</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">📍</div>
+            <div>
+              <div class="contact-item-label">Serving</div>
+              <div class="contact-item-value">Your City & Surrounding Areas</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form reveal reveal-delay-2">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" placeholder="John Smith">
+          </div>
+          <div class="form-group">
+            <label for="business">Business Name</label>
+            <input type="text" id="business" placeholder="Smith's Barbershop">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="john@yourbusiness.com">
+        </div>
+        <div class="form-group">
+          <label for="service">What Do You Need?</label>
+          <select id="service">
+            <option value="">Select a service...</option>
+            <option>New Website</option>
+            <option>Mobile App</option>
+            <option>SEO & Google Ranking</option>
+            <option>Website Redesign</option>
+            <option>Monthly Maintenance</option>
+            <option>Full Digital Package</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message">Tell Us About Your Business</label>
+          <textarea id="message" placeholder="What does your business do? What are your goals?"></textarea>
+        </div>
+        <button class="form-submit" onclick="handleSubmit()">Send Message →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo">NEO<span>.</span>BROTHERS DIGITAL</div>
+    <div class="footer-tagline">Bringing Your Business to the Modern Era</div>
+  </div>
+  <div class="footer-copy">
+    © 2024 Neo Brothers Digital. All rights reserved.<br>
+    Built with <span>♥</span> for local business.
+  </div>
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const cursorRing = document.getElementById('cursorRing');
+  let mouseX = 0, mouseY = 0;
+  let ringX = 0, ringY = 0;
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    cursor.style.left = mouseX - 6 + 'px';
+    cursor.style.top = mouseY - 6 + 'px';
+  });
+
+  function animateRing() {
+    ringX += (mouseX - ringX - 18) * 0.12;
+    ringY += (mouseY - ringY - 18) * 0.12;
+    cursorRing.style.left = ringX + 'px';
+    cursorRing.style.top = ringY + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  document.querySelectorAll('a, button, input, textarea, select').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.transform = 'scale(2)';
+      cursorRing.style.transform = 'scale(1.5)';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.transform = 'scale(1)';
+      cursorRing.style.transform = 'scale(1)';
+    });
+  });
+
+  // Navbar scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Form submit
+  function handleSubmit() {
+    const name = document.getElementById('name').value;
+    if (!name) { alert('Please fill in your name!'); return; }
+    alert('Thanks ' + name + '! We\'ll be in touch within 24 hours with your free mockup. 🚀');
+  }
+
+  // Smooth scroll for nav links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+</body>
+</html>
